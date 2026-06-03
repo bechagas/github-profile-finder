@@ -12,28 +12,28 @@ const Main = ({ profile, repos }) => {
             <span className="stat-value">{profile.followers}</span>
           </div>
 
-          <div class="stat-box">
-            <span class="stat-label">Following</span>
-            <span class="stat-value">{profile.following}</span>
+          <div className="stat-box">
+            <span className="stat-label">Following</span>
+            <span className="stat-value">{profile.following}</span>
           </div>
 
-          <div class="stat-box">
-            <span class="stat-label">Location</span>
-            <span class="stat-value">{profile.location || 'N/A'}</span>
+          <div className="stat-box">
+            <span className="stat-label">Location</span>
+            <span className="stat-value">{profile.location || "N/A"}</span>
           </div>
         </div>
       </div>
 
       <section className="profile-info">
         <h1>{profile.name}</h1>
-        <p>{profile.bio || ''}</p>
+        <p>{profile.bio || ""}</p>
       </section>
 
       <div className="repos-grid">
         {repos.map(repo => (
-          <section className="repo-card">
+          <section className="repo-card" key={repo.id}>
             <h3>{repo.name}</h3>
-            <p>{repo.description} || </p>
+            <p>{repo.description || ""}</p>
             {repo.license && <p>License: {repo.license.name}</p>}
           </section>
         ))}
