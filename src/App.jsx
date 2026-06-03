@@ -18,25 +18,43 @@ const App = () => {
   };
 
   useEffect(() => {
+    let isMounted = true;
+
     const getData = async () => {
-      const user = await fetchUser(username);
-      const repos = await fetchRepos(username);
-      setProfile(user);
-      setRepos(repos);
-      setIsLoading(false);
+      try {
+        const [user, repos] = await Promise.all([
+          fetchUser(username),
+          fetchRepos(username)
+        ]);
+
+        if (isMounted){
+          setProfile(user);
+          setRepos(repos);
+        }
+      } catch (error) {
+        console.error(`Error to fetch data: ${error.message}`);
+      } finally {
+        if (isMounted) setIsLoading(false);
+      }
     };
-    getData();
+
+    if (username) getData();
+
+    return () => { 
+      isMounted = false; 
+    };
+
   }, [username]);
 
   return (
     <div>
       <header className="hero">
         <div className="search-bar">
-          <img src="../assets/Search.svg" alt="Search icon" />
-          <input onKeyDown={handleUserInput} type="text" placeholder="username" value="" />
+          <img src="./assets/Search.svg" alt="Search icon" />
+          <input onKeyDown={handleUserInput} type="text" placeholder="username" />
         </div>
       </header>
-      {!isLoading && 
+      {!isLoading && profile.name &&
         <Main profile={profile} repos={repos} />
       }
     </div>
