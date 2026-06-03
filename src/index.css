@@ -32,7 +32,7 @@ body {
 /* Hero Section */
 .hero {
     height: 240px;
-    background-image: url('../assets/hero-image-github-profile.jpg');
+    background-image: url('./assets/hero-image-github-profile.jpg');
     background-size: cover;
     background-position: center;
     display: flex;
