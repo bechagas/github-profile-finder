@@ -10,7 +10,7 @@
       Demo
     </a>
     <span> | </span>
-    <a href="https://github.com/bechagas/github-profile-search">
+    <a href="https://github.com/bechagas/github-profile-finder">
       Solution
     </a>
     <span> | </span>
@@ -73,7 +73,7 @@ To run this project locally:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/bechagas/github-profile-search.git
+   git clone https://github.com/bechagas/github-profile-finder.git
    ```
 2. Install dependencies:
    ```bash
