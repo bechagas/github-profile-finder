@@ -1,6 +1,4 @@
-<!-- Please update value in the {}  -->
-
-<h1 align="center">Bernardo Chagas | devChallenges</h1>
+<h1 align="center">GitHub Profile Finder</h1>
 
 <div align="center">
    Solution for a challenge <a href="https://devchallenges.io/challenge/github-profile" target="_blank">GitHub Profile</a> from <a href="http://devchallenges.io" target="_blank">devChallenges.io</a>.
@@ -8,11 +6,11 @@
 
 <div align="center">
   <h3>
-    <a href="{https://your-demo-link.your-domain}">
+    <a href="#">
       Demo
     </a>
     <span> | </span>
-    <a href="{https://your-url-to-the-solution}">
+    <a href="https://github.com/bechagas/github-profile-search">
       Solution
     </a>
     <span> | </span>
@@ -22,8 +20,6 @@
   </h3>
 </div>
 
-<!-- TABLE OF CONTENTS -->
-
 ## Table of Contents
 
 - [Overview](#overview)
@@ -31,56 +27,67 @@
   - [Useful resources](#useful-resources)
 - [Built with](#built-with)
 - [Features](#features)
+- [Installation](#installation)
 - [Contact](#contact)
 - [Acknowledgements](#acknowledgements)
 
-<!-- OVERVIEW -->
-
 ## Overview
 
-![screenshot](https://user-images.githubusercontent.com/16707738/92399059-5716eb00-f132-11ea-8b14-bcacdc8ec97b.png)
-
-<!--
-Introduce your projects by taking a screenshot or a gif. Try to tell visitors a story about your project by answering:
-
-- What have you learned/improved?
-- Your wisdom? :)
--->
+A modern, responsive web application that allows users to search for any GitHub profile and view their detailed statistics and top repositories. The application focuses on high performance, a seamless user experience, and strict adherence to the provided design.
 
 ### What I learned
 
-<!-- Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge. -->
+During the development of this project, I focused on several advanced React and Frontend concepts:
+
+- **API Integration & Optimization**: Implemented real-time search suggestions using a **Debounce** technique to avoid hitting the GitHub API rate limits.
+- **Asynchronous State Management**: Coordinated multiple API calls (`Promise.all`) to fetch user profile and repositories simultaneously, reducing load time.
+- **Race Condition Prevention**: Used a cleanup variable (`isMounted`) within `useEffect` to ensure that outdated API responses don't overwrite the state if the user changes the search term rapidly.
+- **Dynamic Date Formatting**: Integrated `date-fns` to transform ISO timestamps from the GitHub API into human-readable relative time (e.g., "updated 2 days ago").
+- **Advanced CSS Layouts**: Leveraged **CSS Grid** for the repositories gallery and **Flexbox** for the profile header, ensuring a pixel-perfect responsive design across mobile, tablet, and desktop.
 
 ### Useful resources
 
-<!--
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
--->
+- [GitHub REST API Documentation](https://docs.github.com/en/rest) - Essential for understanding the data structure of users and repositories.
+- [date-fns Documentation](https://date-fns.org/) - Used for professional date manipulation.
+- [Vite Guide](https://vitejs.dev/guide/) - For a fast and optimized development environment.
 
-### Built with
+## Built with
 
-<!-- This section should list any major frameworks that you built your project using. Here are a few examples.-->
-
-- Semantic HTML5 markup
-- CSS custom properties
-- Flexbox
-- CSS Grid
-- [React](https://reactjs.org/)
-- [Vue.js](https://vuejs.org/)
-- [Tailwind](https://tailwindcss.com/)
+- **React** (Vite)
+- **CSS3** (Custom Properties, Grid, Flexbox)
+- **GitHub API**
+- **date-fns** (for date formatting)
+- **Semantic HTML5**
 
 ## Features
 
-<!-- List the features of your application or follow the template. Don't share the figma file here :) -->
+- **Real-time Suggestions**: A dynamic dropdown that appears as you type, providing a quick preview of the user.
+- **Detailed Profile**: Displays avatar, name, bio, location, and followers/following counts.
+- **Top Repositories**: Showcases the top 4 repositories with their language and star count.
+- **Fully Responsive**: Seamlessly adapts to different screen sizes.
+- **Robust UX**: Includes loading indicators and error handling for non-existent users.
 
-This application/site was created as a submission to a [DevChallenges](https://devchallenges.io/challenges-dashboard) challenge.
+## Installation
 
-## Acknowledgements
+To run this project locally:
 
-<!-- This section should list any articles or add-ons/plugins that helps you to complete the project. This is optional but it will help you in the future. For exmpale -->
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/bechagas/github-profile-search.git
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
 ## Author
 
-- Website [your-website.com](https://{your-web-site-link})
-- GitHub [@your-username](https://{github.com/your-usermame})
+- GitHub [@bechagas](https://github.com/bechagas)
+
+## Acknowledgements
+
+- [devChallenges.io](https://devchallenges.io) for the amazing challenge and design assets.
