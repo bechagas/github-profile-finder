@@ -10,7 +10,7 @@
       Demo
     </a>
     <span> | </span>
-    <a href="https://github.com/bechagas/github-profile-finder">
+    <a href="https://devchallenges.io/solution/67268">
       Solution
     </a>
     <span> | </span>
