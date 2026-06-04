@@ -35,7 +35,7 @@ const Main = ({ profile, repos }) => {
       </section>
 
       <div className="repos-grid">
-        {repos.map(repo => (
+        {repos.slice(0, 4).map(repo => (
           <section className="repo-card" key={repo.id}>
             <h2>{repo.name}</h2>
             <p>{repo.description || "No description available"}</p>
