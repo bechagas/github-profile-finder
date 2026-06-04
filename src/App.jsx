@@ -6,14 +6,18 @@ const App = () => {
   const [profile, setProfile] = useState({});
   const [repos, setRepos] = useState([]);
   const [username, setUsername] = useState("");
+  const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleUserInput = (e) => {
     if (e.key === 'Enter'){
+      const trimmedValue = inputValue.trim();
+      if (!trimmedValue) return;
+      
       setIsLoading(true);
-      const username = e.target.value.trim();
-      if (!username) return;
-      setUsername(username);
+      setError(null);
+      setUsername(trimmedValue);
     }
   };
 
@@ -22,17 +26,20 @@ const App = () => {
 
     const getData = async () => {
       try {
-        const [user, repos] = await Promise.all([
+        const [user, reposData] = await Promise.all([
           fetchUser(username),
           fetchRepos(username)
         ]);
 
         if (isMounted){
           setProfile(user);
-          setRepos(repos);
+          setRepos(reposData);
         }
       } catch (error) {
-        console.error(`Error to fetch data: ${error.message}`);
+        if (isMounted) {
+          setError("User not found or API error. Please try again.");
+          console.error(`Error to fetch data: ${error.message}`);
+        }
       } finally {
         if (isMounted) setIsLoading(false);
       }
@@ -43,20 +50,33 @@ const App = () => {
     return () => { 
       isMounted = false; 
     };
-
+    
   }, [username]);
 
   return (
     <div>
       <header className="hero">
         <div className="search-bar">
-          <img src="./assets/Search.svg" alt="Search icon" />
-          <input onKeyDown={handleUserInput} type="text" placeholder="username" />
+          <img src="/assets/Search.svg" alt="Search icon" />
+          <input 
+            onKeyDown={handleUserInput} 
+            type="text" 
+            placeholder="username" 
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+          />
         </div>
       </header>
-      {!isLoading && profile.name &&
-        <Main profile={profile} repos={repos} />
-      }
+      
+      <div className="container">
+        {isLoading && <div className="loading">Loading...</div>}
+        
+        {error && <div className="error-message">{error}</div>}
+        
+        {!isLoading && !error && profile.name &&
+          <Main profile={profile} repos={repos} />
+        }
+      </div>
     </div>
   );
 };
