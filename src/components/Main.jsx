@@ -1,3 +1,5 @@
+import { formatDistanceToNow } from "date-fns";
+
 const Main = ({ profile, repos }) => {
   return (
     <main className="container">
@@ -38,16 +40,28 @@ const Main = ({ profile, repos }) => {
             <h2>{repo.name}</h2>
             <p>{repo.description || "No description available"}</p>
             <div className="repo-meta">
-              {repo.language && (
+
+              {repo.license?.spdx_id && (
                 <div className="meta-item">
-                  <img src="/assets/Nesting.svg" alt="Language icon" />
-                  <span>{repo.language}</span>
+                  <img src="/assets/License.svg" alt="License icon" />
+                  <span>{repo.license?.spdx_id}</span>
                 </div>
               )}
+
+              <div className="meta-item">
+                <img src="/assets/Fork.svg" alt="Fork icon" />
+                <span>{repo.forks > 0 ? repo.forks : 0}</span>
+              </div>
+
               <div className="meta-item">
                 <img src="/assets/Star.svg" alt="Star icon" />
-                <span>{repo.stargazers_count}</span>
+                <span>{repo.stargazers_count > 0 ? repo.stargazers_count : 0}</span>
               </div>
+
+              <div className="meta-item">
+                <span>updated {formatDistanceToNow(new Date(repo.updated_at), { addSuffix: true })}</span>
+              </div>
+
             </div>
           </section>
         ))}
