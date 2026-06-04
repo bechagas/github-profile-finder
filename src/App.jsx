@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { fetchUser, fetchRepos } from "./service/api.js";
 import Main from "./components/Main.jsx";
+import searchIcon from "./assets/Search.svg";
 
 const App = () => {
   const [profile, setProfile] = useState({});
@@ -84,16 +85,16 @@ const App = () => {
     <div>
       <header className="hero">
         <div className="search-container">
-          <div className="search-bar">
-            <img src="/assets/Search.svg" alt="Search icon" />
-            <input 
-              onKeyDown={handleUserInput} 
-              type="text" 
-              placeholder="username" 
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-            />
-          </div>
+            <div className="search-bar">
+              <img src={searchIcon} alt="Search icon" />
+              <input 
+                onKeyDown={handleUserInput} 
+                type="text" 
+                placeholder="username" 
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+              />
+            </div>
           
           {previewUser && (
             <div className="search-dropdown">

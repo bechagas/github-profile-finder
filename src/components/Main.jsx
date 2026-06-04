@@ -1,4 +1,7 @@
 import { formatDistanceToNow } from "date-fns";
+import licenseIcon from "../assets/License.svg";
+import forkIcon from "../assets/Fork.svg";
+import starIcon from "../assets/Star.svg";
 
 const Main = ({ profile, repos }) => {
   return (
@@ -43,18 +46,18 @@ const Main = ({ profile, repos }) => {
 
               {repo.license?.spdx_id && (
                 <div className="meta-item">
-                  <img src="/assets/License.svg" alt="License icon" />
-                  <span>{repo.license?.spdx_id}</span>
+                  <img src={licenseIcon} alt="License icon" />
+                  <span>{repo.license?.name}</span>
                 </div>
               )}
 
               <div className="meta-item">
-                <img src="/assets/Fork.svg" alt="Fork icon" />
+                <img src={forkIcon} alt="Fork icon" />
                 <span>{repo.forks > 0 ? repo.forks : 0}</span>
               </div>
 
               <div className="meta-item">
-                <img src="/assets/Star.svg" alt="Star icon" />
+                <img src={starIcon} alt="Star icon" />
                 <span>{repo.stargazers_count > 0 ? repo.stargazers_count : 0}</span>
               </div>
 
