@@ -9,6 +9,7 @@ const App = () => {
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [previewUser, setPreviewUser] = useState(null);
 
   const handleUserInput = (e) => {
     if (e.key === 'Enter'){
@@ -18,8 +19,26 @@ const App = () => {
       setIsLoading(true);
       setError(null);
       setUsername(trimmedValue);
+      setPreviewUser(null);
+      setInputValue("");
     }
   };
+
+  useEffect(() => {
+    if (inputValue.trim().length < 2) return;
+
+    const timer = setTimeout(async () => {
+      try {
+        const user = await fetchUser(inputValue.trim());
+        if (user) setPreviewUser(user);
+      } catch (err) {
+        setPreviewUser(null);
+        console.error(err.message);
+      }
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [inputValue]);
 
   useEffect(() => {
     let isMounted = true;
@@ -53,18 +72,40 @@ const App = () => {
     
   }, [username]);
 
+  const handleSelectUser = () => {
+    if (previewUser) {
+      setUsername(previewUser.login);
+      setInputValue(previewUser.login);
+      setPreviewUser(null);
+    }
+  };
+
   return (
     <div>
       <header className="hero">
-        <div className="search-bar">
-          <img src="/assets/Search.svg" alt="Search icon" />
-          <input 
-            onKeyDown={handleUserInput} 
-            type="text" 
-            placeholder="username" 
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-          />
+        <div className="search-container">
+          <div className="search-bar">
+            <img src="/assets/Search.svg" alt="Search icon" />
+            <input 
+              onKeyDown={handleUserInput} 
+              type="text" 
+              placeholder="username" 
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+            />
+          </div>
+          
+          {previewUser && (
+            <div className="search-dropdown">
+              <div className="dropdown-item" onClick={handleSelectUser}>
+                <img src={previewUser.avatar_url} alt={previewUser.name} />
+                <div className="item-info">
+                  <strong>{previewUser.name || previewUser.login}</strong>
+                  <span>{previewUser.bio || "No bio available"}</span>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </header>
       

@@ -29,16 +29,22 @@ body {
     min-height: 100vh;
 }
 
-/* Hero Section */
 .hero {
     height: 240px;
-    background-image: url('/assets/hero-image-github-profile.jpg');
+    background-image: url('./assets/hero-image-github-profile.jpg');
     background-size: cover;
     background-position: center;
     display: flex;
     justify-content: center;
     align-items: flex-start;
     padding-top: 32px;
+}
+
+.search-container {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 24px;
 }
 
 .search-bar {
@@ -48,9 +54,14 @@ body {
     align-items: center;
     padding: 12px 16px;
     width: 100%;
-    max-width: 480px;
     gap: 12px;
-    margin: 0 24px;
+    transition: border-bottom 0.2s ease;
+    border-bottom: 2px solid transparent;
+    box-sizing: border-box;
+}
+
+.search-bar:focus-within {
+    border-bottom: 2px solid var(--color-text-primary);
 }
 
 .search-bar img {
@@ -70,6 +81,64 @@ body {
 
 .search-bar input::placeholder {
     color: var(--color-text-secondary);
+}
+
+.search-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background-color: var(--color-bg-main);
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    animation: fadeIn 0.2s ease;
+    box-sizing: border-box;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    padding: 8px;
+    border-radius: 12px;
+}
+
+.dropdown-item:hover {
+    background-color: var(--color-bg-dark);
+}
+
+.dropdown-item img {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.item-info strong {
+    color: var(--color-text-primary);
+    font-size: var(--text-title);
+    font-weight: 600;
+}
+
+.item-info span {
+    color: var(--color-text-secondary);
+    font-size: var(--text-small);
+    line-height: 1.2;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* Container */
